@@ -9,6 +9,7 @@ import Login from './src/Login';
 import Register from './src/Register';
 import Onboarding from './src/Onboarding';
 import Forgot from './src/Forgot';
+import {AlertNotificationRoot} from 'react-native-alert-notification';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -20,19 +21,20 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Splash"
-        screenOptions={{
-          headerShown: false,
-        }}>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Splash" component={Splash} />
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Register" component={Register} />
-        <Stack.Screen name="Onboarding" component={Onboarding} />
-        <Stack.Screen name="Forgot" component={Forgot} />
-      </Stack.Navigator>
-      <View></View>
+      <AlertNotificationRoot>
+        <Stack.Navigator
+          initialRouteName="Splash"
+          screenOptions={{
+            headerShown: false,
+          }}>
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Splash" component={Splash} />
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Register" component={Register} />
+          <Stack.Screen name="Onboarding" component={Onboarding} />
+          <Stack.Screen name="Forgot" component={Forgot} />
+        </Stack.Navigator>
+      </AlertNotificationRoot>
     </NavigationContainer>
   );
 };

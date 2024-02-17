@@ -8,9 +8,31 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
+import firestore from '@react-native-firebase/firestore';
+import {ALERT_TYPE, Dialog} from 'react-native-alert-notification';
 
 const Register = ({navigation}) => {
+  const [email, setemail] = useState('');
+  const [phone, setphone] = useState('');
+  const [password, setpassword] = useState('');
+  const register = async () => {
+    firestore()
+      .collection('Users')
+      .add({
+        email: email,
+        phone: phone,
+        password: password,
+      })
+      .then(() => {
+        Dialog.show({
+          type: ALERT_TYPE.SUCCESS,
+          title: 'Success',
+          textBody: 'Congrats! User create Successfully',
+          button: 'close',
+        });
+      });
+  };
   return (
     <ScrollView>
       <View className="flex justify-around flex-1">
@@ -25,18 +47,24 @@ const Register = ({navigation}) => {
         <TextInput
           className="border-2 px-4 py-2  rounded-lg  my-2 mx-8 border-[#c4c5c7] font-Regular text-xs "
           placeholder="Enter your Email "
+          onChangeText={setemail}
+          value={email}
         />
         <TextInput
           className="border-2 px-4 py-2 rounded-lg my-2 mx-8 border-[#c4c5c7] font-Regular text-xs"
           placeholder="Enter your phone number "
+          onChangeText={setphone}
+          value={phone}
         />
         <TextInput
           className="border-2 px-4 py-2  rounded-lg my-2 mx-8 border-[#c4c5c7] font-Regular text-xs"
           placeholder="Enter your password "
+          onChangeText={setpassword}
+          value={password}
         />
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('Home');
+            register();
           }}
           className="m-6 rounded-lg py-3  mx-8 flex flex-row justify-evenly bg-primary ">
           <Text className="text-xs text-center self-center text-white font-Bold ">
