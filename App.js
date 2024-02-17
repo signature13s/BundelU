@@ -6,27 +6,22 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import Home from './src/Home';
 
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {NavigationContainer} from '@react-navigation/native';
+import SplashScreen from './src/Onboarding';
 
 const App = () => {
-
-
-  const Stack = createNativeStackNavigator()
-  useEffect(()=>{
-    PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
-  },[]);
-
+  useEffect(() => {
+    PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
+    );
+  }, []);
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{
-        headerShown:false
-      }}>
-        <Stack.Screen name ="Home" component={Home}/>
-      </Stack.Navigator>
-    <View>
+    <View className="bg-primaryLight flex-1">
+      <Text className="text-red-400 text-4xl font-Bold ">App</Text>
     </View>
-    </NavigationContainer>
-  )
-}
+  );
+};
 
 export default App
 
