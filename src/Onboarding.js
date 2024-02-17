@@ -11,7 +11,7 @@ import {
 import React from 'react';
 import * as Animatable from 'react-native-animatable';
 
-const SplashScreen = ({navigation}) => {
+const Onboarding = ({navigation}) => {
   return (
     <View className="flex flex-1">
       <View className="flex  flex-col justify-evenly items-center bg-white h-screen px-10 ">
@@ -64,6 +64,6 @@ const SplashScreen = ({navigation}) => {
   );
 };
 
-export default SplashScreen;
+export default Onboarding;
 
 const styles = StyleSheet.create({});

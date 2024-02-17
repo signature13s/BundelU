@@ -3,7 +3,7 @@ import React, {useEffect} from 'react';
 import messaging from '@react-native-firebase/messaging';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
-import SplashScreen from './src/SplashScreen';
+import SplashScreen from './src/Onboarding';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -17,7 +17,7 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
-          headerShown: false
+          headerShown: false,
         }}>
         <Stack.Screen name="Welcome" component={SplashScreen} options={{}} />
       </Stack.Navigator>
