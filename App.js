@@ -1,7 +1,9 @@
 import {PermissionsAndroid, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
 import messaging from '@react-native-firebase/messaging';
-
+import register from './src/Register';
+import Register from './src/Register';
+ 
 const App = () => {
   useEffect(() => {
     PermissionsAndroid.request(
@@ -9,8 +11,8 @@ const App = () => {
     );
   }, []);
   return (
-    <View className="bg-primaryLight flex-1">
-      <Text className="text-red-400 text-4xl font-Bold ">App</Text>
+    <View>
+      <Register/>
     </View>
   );
 };
