@@ -1,6 +1,7 @@
 import {
   Button,
   Image,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -9,62 +10,70 @@ import {
 } from 'react-native';
 import React from 'react';
 
-const Register = () => {
+const Register = ({navigation}) => {
   return (
-    <View className="flex justify-center ">
-      <Image
-        source={require('../assets/image/bu_logo.png')}
-        className="w-24 h-24 mx-auto mt-10"
-        resizeMode="contain"
-      />
-      <Text className=" text-xl text-center font-Bold text-purple-600 m-4  mt-3">
-        BUNDELU
-      </Text>
-      <TextInput
-        className="border-2 px-3  rounded-lg m-3 my-4 mx-8 border-[#c4c5c7] font-Regular text-md "
-        placeholder="Enter your Email "
-      />
-      <TextInput
-        className="border-2 px-3 rounded-lg m-3 mx-8 border-[#c4c5c7] font-Regular text-md"
-        placeholder="Enter your phone number "
-      />
-      <TextInput
-        className="border-2 px-3  rounded-lg m-3 mx-8 border-[#c4c5c7] font-Regular text-mg"
-        placeholder="Enter your password "
-      />
-      <TouchableOpacity
-        onPress={() => {
-          console.log('the');
-        }}
-        className="m-6 rounded-lg py-2  mx-8 flex flex-row justify-evenly bg-purple-500 ">
-        <Text className="text-md text-center self-center text-white py-2">
-          Sign Up
-        </Text>
-      </TouchableOpacity>
-
-      <Text className="text-gray text-lg text-center  m-3 ">
-        --------------or continue with-------------
-      </Text>
-      <TouchableOpacity
-        onPress={() => {
-          console.log('the');
-        }}
-        className="rounded-lg  m-4 px-2 py-2 border-2 mx-8 flex flex-row justify-evenly border-[#c4c5c7] ">
+    <ScrollView>
+      <View className="flex justify-around flex-1">
         <Image
-          className="h-8 w-8"
-          source={require('./../assets/image/google_logo.png')}
+          source={require('../assets/images/bu_logo.png')}
+          className="w-24 h-24 mx-auto mt-10"
+          resizeMode="contain"
         />
-        <Text className="text-lg text-center self-center ">
-          Sign in with google
+        <Text className=" text-3xl text-center font-Bold text-primary m-4  mt-3">
+          BUNDEL U
         </Text>
-      </TouchableOpacity>
-      <View className="flex flex-row justify-center items-center space-x-2">
-        <Text className="text-gray text-lg text-center ">
-          Already have an account?
+        <TextInput
+          className="border-2 px-4 py-2  rounded-lg  my-2 mx-8 border-[#c4c5c7] font-Regular text-xs "
+          placeholder="Enter your Email "
+        />
+        <TextInput
+          className="border-2 px-4 py-2 rounded-lg my-2 mx-8 border-[#c4c5c7] font-Regular text-xs"
+          placeholder="Enter your phone number "
+        />
+        <TextInput
+          className="border-2 px-4 py-2  rounded-lg my-2 mx-8 border-[#c4c5c7] font-Regular text-xs"
+          placeholder="Enter your password "
+        />
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('Home');
+          }}
+          className="m-6 rounded-lg py-3  mx-8 flex flex-row justify-evenly bg-primary ">
+          <Text className="text-xs text-center self-center text-white font-Bold ">
+            Sign Up
+          </Text>
+        </TouchableOpacity>
+
+        <Text className="text-gray text-lg text-center  my-2 ">
+          --------------or continue with-------------
         </Text>
-        <Text className="underline text-purple-500 text-lg">Login</Text>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('Login');
+          }}
+          className="rounded-lg  my-4 px-2 py-1 border-2 mx-8 flex flex-row justify-evenly border-[#c4c5c7] ">
+          <Image
+            className="h-8 w-8"
+            source={require('../assets/images/google_logo.png')}
+          />
+          <Text className="text-sm text-center self-center ">
+            Sign up with google
+          </Text>
+        </TouchableOpacity>
+        <View className="flex flex-row justify-center items-center space-x-2 mt-5">
+          <Text className="text-gray text-sm text-center font-Regular ">
+            Already have an account ?
+          </Text>
+          <Text
+            className="underline text-primary text-sm font-Regular "
+            onPress={() => {
+              navigation.navigate('Login');
+            }}>
+            Login
+          </Text>
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
