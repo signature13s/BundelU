@@ -1,14 +1,30 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import {PermissionsAndroid, StyleSheet, Text, View} from 'react-native';
+import React, {useEffect} from 'react';
+import messaging from '@react-native-firebase/messaging';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {NavigationContainer} from '@react-navigation/native';
+import SplashScreen from './src/Onboarding';
 
-const Home = () => {
+const App = () => {
+  const Stack = createNativeStackNavigator();
+
+  useEffect(() => {
+    PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
+    );
+  }, []);
   return (
-    <View>
-      <Text>Home</Text>
-    </View>
-  )
-}
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}>
+        <Stack.Screen name="Welcome" component={SplashScreen} options={{}} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
 
-export default Home
+export default App;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});
