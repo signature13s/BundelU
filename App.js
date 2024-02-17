@@ -1,14 +1,13 @@
 import {PermissionsAndroid, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
 import messaging from '@react-native-firebase/messaging';
-import Splash from './src/Splash';
-import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Home from './src/Home';
-
-const Stack = createNativeStackNavigator();
+import {NavigationContainer} from '@react-navigation/native';
+import SplashScreen from './src/Onboarding';
 
 const App = () => {
+  const Stack = createNativeStackNavigator();
+
   useEffect(() => {
     PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
@@ -17,12 +16,10 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Splash"
         screenOptions={{
           headerShown: false,
         }}>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Splash" component={Splash} />
+        <Stack.Screen name="Welcome" component={SplashScreen} options={{}} />
       </Stack.Navigator>
     </NavigationContainer>
   );
