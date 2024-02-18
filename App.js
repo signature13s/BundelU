@@ -13,6 +13,7 @@ import {AlertNotificationRoot} from 'react-native-alert-notification';
 import Account from './src/Account';
 import Notes from './src/Notes';
 import Tabs from './src/Tabs';
+import Addnotes from './src/Addnotes';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -38,6 +39,7 @@ const App = () => {
           <Stack.Screen name="Forgot" component={Forgot} />
           <Stack.Screen name="Account" component={Account} />
           <Stack.Screen name="Notes" component={Notes} />
+          <Stack.Screen name="Addnotes" component={Addnotes} />
         </Stack.Navigator>
       </AlertNotificationRoot>
     </NavigationContainer>
