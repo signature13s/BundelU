@@ -54,7 +54,7 @@ const Onboarding = ({navigation}) => {
         <TouchableOpacity
           className="bg-primary   py-4  rounded-xl"
           onPress={() => {
-            navigation.navigate('Login');
+            navigation.navigate('ChooseType');
           }}>
           <Text className="text-white text-center font-Bold ">Continue</Text>
         </TouchableOpacity>
