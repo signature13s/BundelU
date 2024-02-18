@@ -61,7 +61,8 @@ const Home = ({navigation}) => {
               Upload PYQs & Notes
             </Text>
             <TouchableOpacity className="bg-violet-500 px-4 py-1 rounded-sm">
-              <Text className="text-xs font-Regular text-white ">
+              <Text className="text-xs font-Regular text-white " onPress={()=>
+              navigation.navigate('Notes')}>
                 Click Here
               </Text>
             </TouchableOpacity>

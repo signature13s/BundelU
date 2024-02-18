@@ -15,6 +15,7 @@ import auth from '@react-native-firebase/auth';
 import {
   GoogleSignin,
 } from '@react-native-google-signin/google-signin';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Register = ({navigation}) => {
   const [email, setemail] = useState('');
@@ -34,6 +35,7 @@ const Register = ({navigation}) => {
       if (userInfo) {
         Alert.alert('Account Created ! Please Login');
         navigation.navigate('Login');
+        await AsyncStorage.setItem('userId', userInfo.user.id);
       }
     } catch (error) {
       Alert.alert(error.message);
