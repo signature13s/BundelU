@@ -32,7 +32,7 @@ const Login = ({navigation}) => {
       const userInfo = await GoogleSignin.signIn();
       if (userInfo) {
         Alert.alert('Login Successfully');
-        navigation.navigate('Login');
+        navigation.navigate('Home');
       }
     } catch (error) {
       Alert.alert(error.message);
@@ -50,7 +50,7 @@ const Login = ({navigation}) => {
           button: 'close',
         });
         await AsyncStorage.setItem('userId', user.user.uid);
-        // navigation.navigate('Home');
+         navigation.navigate('Home');
       })
       .catch(error => {
         Alert.alert(error.message);

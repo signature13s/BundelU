@@ -76,6 +76,7 @@ const Home = ({navigation}) => {
           className="h-56 w-full rounded-md"
           source={require('../assets/images/map.png')}
         />
+
       </View>
     </ScrollView>
   );
