@@ -12,7 +12,20 @@
           "package_name": "com.bundelu"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "154655169375-23rp5gihcieqc082ii41ui1cqlm3pviv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bundelu",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "154655169375-p0ad0tjpa363tvvrk92op436420qt17d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAevpiUldi3J4RBjiogfbfD55i8kVbVYAI"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "154655169375-p0ad0tjpa363tvvrk92op436420qt17d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
