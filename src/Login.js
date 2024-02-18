@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   View,
   Text,
@@ -8,10 +7,15 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
+  Alert,
 } from 'react-native';
+import auth from '@react-native-firebase/auth';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import React, {useEffect, useState} from 'react';
+import {ALERT_TYPE, Dialog} from 'react-native-alert-notification';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({navigation}) => {
-  
   const [email, setemail] = useState('');
   const [password, setpassword] = useState('');
 
@@ -28,10 +32,11 @@ const Login = ({navigation}) => {
       const userInfo = await GoogleSignin.signIn();
       if (userInfo) {
         Alert.alert('Login Successfully');
+        await AsyncStorage.setItem('userId', userInfo.user.id);
         navigation.navigate('Home');
       }
     } catch (error) {
-      Alert.alert(error.message);
+      Alert.alert(error.message); 
     }
   };
 
@@ -46,13 +51,12 @@ const Login = ({navigation}) => {
           button: 'close',
         });
         await AsyncStorage.setItem('userId', user.user.uid);
-         navigation.navigate('Home');
+        navigation.navigate('Home');
       })
       .catch(error => {
         Alert.alert(error.message);
       });
   };
-
 
   return (
     <ScrollView>
@@ -70,25 +74,28 @@ const Login = ({navigation}) => {
 
         <View className="my-10">
           <TextInput
-            className=" border-gray border rounded my-2 px-4 font-Regular text-xs py-2 text-black"
-            placeholderTextColor={"gray"}
-            placeholder="Enter your email Address "
-            keyboardType="email-address"
+            className="border-2 px-4 py-2  rounded-lg  my-2  border-[#c4c5c7] font-Regular text-xs "
+            placeholder="Enter your Email "
+            onChangeText={setemail}
+            value={email}
           />
           <TextInput
-            className="border  border-gray rounded my-2 px-4 font-Regular text-xs py-2 text-black placeholder-black "
-            placeholderTextColor={"gray"}
-            placeholder="Enter your Password"
-            secureTextEntry={true}
+            className="border-2 px-4 py-2  rounded-lg my-2  border-[#c4c5c7] font-Regular text-xs"
+            placeholder="Enter your password "
+            onChangeText={setpassword}
+            value={password}
+            secureTextEntry
           />
           <Text
-            className="text-right font-Bold text-primary my-4 text-xs  "
+            className="text-right font-Bold text-primary my-4 text-xs"
             onPress={() => {
               navigation.navigate('Forgot');
             }}>
             Forgot Password ?
           </Text>
-          <TouchableOpacity className="bg-primary  rounded-md py-3">
+          <TouchableOpacity
+            className="bg-primary  rounded-md py-3"
+            onPress={login}>
             <Text className="text-sm text-center  text-white font-Regular">
               Login
             </Text>
@@ -96,21 +103,23 @@ const Login = ({navigation}) => {
         </View>
 
         <View>
-          <Text className="text-center text-base py-10 text-gray">
+          <Text className="text-center text-sm py-10">
             ------ or continue with ------
           </Text>
 
-          <TouchableOpacity className="border rounded flex-row  justify-center space-x-4 items-center py-1">
+          <TouchableOpacity
+            className="border rounded flex-row  justify-center space-x-4 items-center py-1"
+            onPress={signIn}>
             <Image
               source={require('../assets/images/google_logo.png')}
               className=" w-8 h-8"
             />
-            <Text className="text-center py-2 text-sm font-Regular text-black">
+            <Text className="text-center py-2 text-sm font-Regular">
               Login up with Google
             </Text>
           </TouchableOpacity>
           <View className="flex flex-row py-2 justify-center space-x-2 mt-5">
-            <Text className="text-center  font-Regular  text-black">
+            <Text className="text-center  font-Regular">
               Don't have an account?
             </Text>
 
