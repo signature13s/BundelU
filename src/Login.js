@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   View,
   Text,
@@ -7,15 +8,10 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
-  Alert,
 } from 'react-native';
-import auth from '@react-native-firebase/auth';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import React, {useEffect, useState} from 'react';
-import {ALERT_TYPE, Dialog} from 'react-native-alert-notification';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({navigation}) => {
+  
   const [email, setemail] = useState('');
   const [password, setpassword] = useState('');
 
@@ -57,6 +53,7 @@ const Login = ({navigation}) => {
       });
   };
 
+
   return (
     <ScrollView>
       <View className="flex flex-col justify-around  px-8 flex-1">
@@ -73,17 +70,14 @@ const Login = ({navigation}) => {
 
         <View className="my-10">
           <TextInput
-            className="border-2 px-4 py-2  rounded-lg  my-2  border-[#c4c5c7] font-Regular text-xs "
-            placeholder="Enter your Email "
-            onChangeText={setemail}
-            value={email}
+            className=" border-gray border rounded my-2 px-4 font-Regular text-xs py-2"
+            placeholder="Enter your email Address"
+            keyboardType="email-address"
           />
           <TextInput
-            className="border-2 px-4 py-2  rounded-lg my-2  border-[#c4c5c7] font-Regular text-xs"
-            placeholder="Enter your password "
-            onChangeText={setpassword}
-            value={password}
-            secureTextEntry
+            className="border  border-gray rounded my-2 px-4 font-Regular text-xs py-2 "
+            placeholder="Enter your Password"
+            secureTextEntry={true}
           />
           <Text
             className="text-right font-Bold text-primary my-4 text-xs"
@@ -92,9 +86,7 @@ const Login = ({navigation}) => {
             }}>
             Forgot Password ?
           </Text>
-          <TouchableOpacity
-            className="bg-primary  rounded-md py-3"
-            onPress={login}>
+          <TouchableOpacity className="bg-primary  rounded-md py-3">
             <Text className="text-sm text-center  text-white font-Regular">
               Login
             </Text>
@@ -106,9 +98,7 @@ const Login = ({navigation}) => {
             ------ or continue with ------
           </Text>
 
-          <TouchableOpacity
-            className="border rounded flex-row  justify-center space-x-4 items-center py-1"
-            onPress={signIn}>
+          <TouchableOpacity className="border rounded flex-row  justify-center space-x-4 items-center py-1">
             <Image
               source={require('../assets/images/google_logo.png')}
               className=" w-8 h-8"
