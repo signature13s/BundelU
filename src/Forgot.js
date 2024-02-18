@@ -56,7 +56,8 @@ const Forgot = ({navigation}) => {
 
         <View className="my-2">
           <TextInput
-            className=" border-gray border rounded my-2 px-4 font-Regular text-xs py-2"
+            className=" border-gray border rounded my-2 px-4 font-Regular text-xs py-2  placeholder-black text-black"
+            placeholderTextColor={"gray"}
             placeholder="Enter your email Address"
             keyboardType="email-address"
             value={email}
@@ -70,6 +71,7 @@ const Forgot = ({navigation}) => {
               Send Code
             </Text>
           </TouchableOpacity>
+
         </View>
       </View>
       <View className="  flex flex-row justify-center  space-x-2 absolute bottom-20 mx-auto w-full">

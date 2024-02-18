@@ -70,17 +70,19 @@ const Login = ({navigation}) => {
 
         <View className="my-10">
           <TextInput
-            className=" border-gray border rounded my-2 px-4 font-Regular text-xs py-2"
-            placeholder="Enter your email Address"
+            className=" border-gray border rounded my-2 px-4 font-Regular text-xs py-2 text-black"
+            placeholderTextColor={"gray"}
+            placeholder="Enter your email Address "
             keyboardType="email-address"
           />
           <TextInput
-            className="border  border-gray rounded my-2 px-4 font-Regular text-xs py-2 "
+            className="border  border-gray rounded my-2 px-4 font-Regular text-xs py-2 text-black placeholder-black "
+            placeholderTextColor={"gray"}
             placeholder="Enter your Password"
             secureTextEntry={true}
           />
           <Text
-            className="text-right font-Bold text-primary my-4 text-xs"
+            className="text-right font-Bold text-primary my-4 text-xs  "
             onPress={() => {
               navigation.navigate('Forgot');
             }}>
@@ -94,7 +96,7 @@ const Login = ({navigation}) => {
         </View>
 
         <View>
-          <Text className="text-center text-sm py-10">
+          <Text className="text-center text-base py-10 text-gray">
             ------ or continue with ------
           </Text>
 
@@ -103,12 +105,12 @@ const Login = ({navigation}) => {
               source={require('../assets/images/google_logo.png')}
               className=" w-8 h-8"
             />
-            <Text className="text-center py-2 text-sm font-Regular">
+            <Text className="text-center py-2 text-sm font-Regular text-black">
               Login up with Google
             </Text>
           </TouchableOpacity>
           <View className="flex flex-row py-2 justify-center space-x-2 mt-5">
-            <Text className="text-center  font-Regular">
+            <Text className="text-center  font-Regular  text-black">
               Don't have an account?
             </Text>
 
