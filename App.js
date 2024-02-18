@@ -12,6 +12,7 @@ import Forgot from './src/Forgot';
 import {AlertNotificationRoot} from 'react-native-alert-notification';
 import Account from './src/Account';
 import Notes from './src/Notes';
+import Tabs from './src/Tabs';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -29,7 +30,7 @@ const App = () => {
           screenOptions={{
             headerShown: false,
           }}>
-          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Home" component={Tabs} />
           <Stack.Screen name="Splash" component={Splash} />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Register" component={Register} />

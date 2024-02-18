@@ -11,6 +11,49 @@ import {
 } from 'react-native';
 
 const Login = ({navigation}) => {
+  
+  const [email, setemail] = useState('');
+  const [password, setpassword] = useState('');
+
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId:
+        '154655169375-p0ad0tjpa363tvvrk92op436420qt17d.apps.googleusercontent.com',
+    });
+  }, []);
+
+  const signIn = async () => {
+    try {
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+      if (userInfo) {
+        Alert.alert('Login Successfully');
+        navigation.navigate('Home');
+      }
+    } catch (error) {
+      Alert.alert(error.message);
+    }
+  };
+
+  const login = () => {
+    auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(async user => {
+        Dialog.show({
+          type: ALERT_TYPE.SUCCESS,
+          title: 'Success',
+          textBody: 'Login Successfully',
+          button: 'close',
+        });
+        await AsyncStorage.setItem('userId', user.user.uid);
+         navigation.navigate('Home');
+      })
+      .catch(error => {
+        Alert.alert(error.message);
+      });
+  };
+
+
   return (
     <ScrollView>
       <View className="flex flex-col justify-around  px-8 flex-1">
