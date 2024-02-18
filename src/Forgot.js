@@ -32,8 +32,8 @@ const Forgot = ({navigation}) => {
   };
 
   return (
-    <ScrollView>
-      <View className="flex flex-col justify-around  px-8 flex-1">
+    <View className="bg-white flex-1">
+      <View className="flex flex-col justify-around   px-8  ">
         <View>
           <Image
             source={require('../assets/images/bu_logo.png')}
@@ -45,9 +45,19 @@ const Forgot = ({navigation}) => {
           </Text>
         </View>
 
-        <View className="my-10">
+        <Text className="text-center font-Bold text-xl text-black">
+          Forgot Password
+        </Text>
+
+        <Text className="text-center py-3 font-Regular">
+          Don't worry! it happens. Please enter the email associated with your
+          account.
+        </Text>
+
+        <View className="my-2">
           <TextInput
-            className=" border-gray border rounded my-2 px-4 font-Regular text-xs py-2"
+            className=" border-gray border rounded my-2 px-4 font-Regular text-xs py-2  placeholder-black text-black"
+            placeholderTextColor={"gray"}
             placeholder="Enter your email Address"
             keyboardType="email-address"
             value={email}
@@ -58,12 +68,19 @@ const Forgot = ({navigation}) => {
             className="bg-primary  rounded-md py-3 my-5"
             onPress={send}>
             <Text className="text-sm text-center  text-white font-Regular">
-              Send Reset Link
+              Send Code
             </Text>
           </TouchableOpacity>
+
         </View>
       </View>
-    </ScrollView>
+      <View className="  flex flex-row justify-center  space-x-2 absolute bottom-20 mx-auto w-full">
+        <Text className="text-sm font-Regular ">Remember Password ?</Text>
+        <TouchableOpacity>
+          <Text className="text-sm text-primary font-Regular ">Login</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 };
 

@@ -32,10 +32,11 @@ const Login = ({navigation}) => {
       const userInfo = await GoogleSignin.signIn();
       if (userInfo) {
         Alert.alert('Login Successfully');
-        navigation.navigate('Login');
+        await AsyncStorage.setItem('userId', userInfo.user.id);
+        navigation.navigate('Home');
       }
     } catch (error) {
-      Alert.alert(error.message);
+      Alert.alert(error.message); 
     }
   };
 

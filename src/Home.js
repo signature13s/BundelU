@@ -61,9 +61,8 @@ const Home = ({navigation}) => {
               Upload PYQs & Notes
             </Text>
             <TouchableOpacity className="bg-violet-500 px-4 py-1 rounded-sm">
-              <Text className="text-xs font-Regular text-white " onPress={()=>{
-                navigation.navigate('Notes');
-              }}>
+              <Text className="text-xs font-Regular text-white " onPress={()=>
+              navigation.navigate('Notes')}>
                 Click Here
               </Text>
             </TouchableOpacity>
@@ -78,6 +77,7 @@ const Home = ({navigation}) => {
           className="h-56 w-full rounded-md"
           source={require('../assets/images/map.png')}
         />
+
       </View>
     </ScrollView>
   );
