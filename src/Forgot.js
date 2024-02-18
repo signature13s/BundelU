@@ -27,12 +27,14 @@ const Forgot = ({navigation}) => {
 
         <View className="my-10">
           <TextInput
-            className=" border-gray border rounded my-2 px-4 font-Regular text-xs py-2"
+            className=" border-gray border rounded my-2 px-4 font-Regular text-xs py-2  placeholder-black text-black"
+            placeholderTextColor={"gray"}
             placeholder="Enter your email Address"
             keyboardType="email-address"
           />
           <TextInput
-            className="border  border-gray rounded my-2 px-4 font-Regular text-xs py-2 "
+            className="border  border-gray rounded my-2 px-4 font-Regular text-xs py-2 text-black"
+            placeholderTextColor={"gray"}
             placeholder="Enter OTP"
             secureTextEntry={true}
           />
@@ -51,7 +53,7 @@ const Forgot = ({navigation}) => {
         </View>
 
         <View>
-          <Text className="text-center text-sm py-10">
+          <Text className="text-center text-sm py-10 text-black">
             ------ or continue with ------
           </Text>
 
@@ -60,12 +62,12 @@ const Forgot = ({navigation}) => {
               source={require('../assets/images/google_logo.png')}
               className=" w-8 h-8"
             />
-            <Text className="text-center py-2 text-sm font-Regular">
+            <Text className="text-center py-2 text-sm font-Regular text-black">
               Login up with Google
             </Text>
           </TouchableOpacity>
           <View className="flex flex-row py-2 justify-center space-x-2 mt-5">
-            <Text className="text-center  font-Regular">
+            <Text className="text-center  font-Regular text-black">
               Don't have an account?
             </Text>
 

@@ -93,13 +93,15 @@ const Register = ({navigation}) => {
           BUNDEL U
         </Text>
         <TextInput
-          className="border-2 px-4 py-2  rounded-lg  my-2 mx-8 border-[#c4c5c7] font-Regular text-xs "
+          className="border-2 px-4 py-2  rounded-lg  my-2 mx-8 border-[#c4c5c7] font-Regular text-xs text-black placeholder-black"
+          placeholderTextColor={"gray"}
           placeholder="Enter your Email "
           onChangeText={setemail}
           value={email}
         />
         <TextInput
-          className="border-2 px-4 py-2  rounded-lg my-2 mx-8 border-[#c4c5c7] font-Regular text-xs"
+          className="border-2 px-4 py-2  rounded-lg my-2 mx-8 border-[#c4c5c7] font-Regular text-xs text-black  placeholder-black"
+          placeholderTextColor={"gray"}
           placeholder="Enter your password "
           onChangeText={setpassword}
           value={password}
@@ -114,7 +116,7 @@ const Register = ({navigation}) => {
           </Text>
         </TouchableOpacity>
 
-        <Text className="text-gray text-lg text-center  my-2 ">
+        <Text className="text-gray text-base text-center  my-2 ">
           --------------or continue with-------------
         </Text>
         <TouchableOpacity
@@ -124,7 +126,7 @@ const Register = ({navigation}) => {
             className="h-8 w-8"
             source={require('../assets/images/google_logo.png')}
           />
-          <Text className="text-sm text-center self-center ">
+          <Text className="text-sm text-center self-center  text-black">
             Sign up with google
           </Text>
         </TouchableOpacity>
