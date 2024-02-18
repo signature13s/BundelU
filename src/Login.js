@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   View,
   Text,
@@ -8,9 +7,56 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
+  Alert,
 } from 'react-native';
+import auth from '@react-native-firebase/auth';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import React, {useEffect, useState} from 'react';
+import {ALERT_TYPE, Dialog} from 'react-native-alert-notification';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({navigation}) => {
+  const [email, setemail] = useState('');
+  const [password, setpassword] = useState('');
+
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId:
+        '154655169375-p0ad0tjpa363tvvrk92op436420qt17d.apps.googleusercontent.com',
+    });
+  }, []);
+
+  const signIn = async () => {
+    try {
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+      if (userInfo) {
+        Alert.alert('Login Successfully');
+        navigation.navigate('Login');
+      }
+    } catch (error) {
+      Alert.alert(error.message);
+    }
+  };
+
+  const login = () => {
+    auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(async user => {
+        Dialog.show({
+          type: ALERT_TYPE.SUCCESS,
+          title: 'Success',
+          textBody: 'Login Successfully',
+          button: 'close',
+        });
+        await AsyncStorage.setItem('userId', user.user.uid);
+        // navigation.navigate('Home');
+      })
+      .catch(error => {
+        Alert.alert(error.message);
+      });
+  };
+
   return (
     <ScrollView>
       <View className="flex flex-col justify-around  px-8 flex-1">
@@ -27,14 +73,17 @@ const Login = ({navigation}) => {
 
         <View className="my-10">
           <TextInput
-            className=" border-gray border rounded my-2 px-4 font-Regular text-xs py-2"
-            placeholder="Enter your email Address"
-            keyboardType="email-address"
+            className="border-2 px-4 py-2  rounded-lg  my-2  border-[#c4c5c7] font-Regular text-xs "
+            placeholder="Enter your Email "
+            onChangeText={setemail}
+            value={email}
           />
           <TextInput
-            className="border  border-gray rounded my-2 px-4 font-Regular text-xs py-2 "
-            placeholder="Enter your Password"
-            secureTextEntry={true}
+            className="border-2 px-4 py-2  rounded-lg my-2  border-[#c4c5c7] font-Regular text-xs"
+            placeholder="Enter your password "
+            onChangeText={setpassword}
+            value={password}
+            secureTextEntry
           />
           <Text
             className="text-right font-Bold text-primary my-4 text-xs"
@@ -43,7 +92,9 @@ const Login = ({navigation}) => {
             }}>
             Forgot Password ?
           </Text>
-          <TouchableOpacity className="bg-primary  rounded-md py-3">
+          <TouchableOpacity
+            className="bg-primary  rounded-md py-3"
+            onPress={login}>
             <Text className="text-sm text-center  text-white font-Regular">
               Login
             </Text>
@@ -55,7 +106,9 @@ const Login = ({navigation}) => {
             ------ or continue with ------
           </Text>
 
-          <TouchableOpacity className="border rounded flex-row  justify-center space-x-4 items-center py-1">
+          <TouchableOpacity
+            className="border rounded flex-row  justify-center space-x-4 items-center py-1"
+            onPress={signIn}>
             <Image
               source={require('../assets/images/google_logo.png')}
               className=" w-8 h-8"
