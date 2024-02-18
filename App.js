@@ -10,6 +10,8 @@ import Register from './src/Register';
 import Onboarding from './src/Onboarding';
 import Forgot from './src/Forgot';
 import {AlertNotificationRoot} from 'react-native-alert-notification';
+import Account from './src/Account';
+import Notes from './src/Notes';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -33,6 +35,8 @@ const App = () => {
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="Onboarding" component={Onboarding} />
           <Stack.Screen name="Forgot" component={Forgot} />
+          <Stack.Screen name="Account" component={Account} />
+          <Stack.Screen name="Notes" component={Notes} />
         </Stack.Navigator>
       </AlertNotificationRoot>
     </NavigationContainer>

@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import React from 'react';
 
-const Home = navigation => {
+const Home = ({navigation}) => {
   return (
     <ScrollView className="bg-white flex-1 px-4">
       <View>
@@ -18,15 +18,19 @@ const Home = navigation => {
             <Text className=" text-black text-xl font-Bold">NDEL U</Text>
           </View>
 
-          <Image
-            className="w-8 h-8 self-center"
-            source={require('../assets/images/bu_logo.png')}
-          />
+          <TouchableOpacity
+            classname="self-center"
+            onPress={() => {
+              navigation.navigate('Account');
+            }}>
+            <Image
+              className="w-8 h-8 "
+              source={require('../assets/images/bu_logo.png')}
+            />
+          </TouchableOpacity>
         </View>
 
-        <Text className="text-gray text-sm font-Bold mb-2 ">
-          PYQ & Notes
-        </Text>
+        <Text className="text-gray text-sm font-Bold mb-2 ">PYQ & Notes</Text>
 
         <View classname="flex flex-auto rounded-md ">
           <Text className="text-black bg-slate-200 py-4 px-4 text-xs font-Regular rounded-lg my-1">
@@ -43,7 +47,6 @@ const Home = navigation => {
           </Text>
         </View>
 
-
         <Text className="text-gray text-sm font-Bold my-2 ">
           Notice/Informations
         </Text>
@@ -54,14 +57,20 @@ const Home = navigation => {
           />
 
           <View className="flex flex-col space-y-4  items-center justify-center">
-            <Text className="text-sm  text-center text-primary font-Bold">Upload PYQs & Notes</Text>
+            <Text className="text-sm  text-center text-primary font-Bold">
+              Upload PYQs & Notes
+            </Text>
             <TouchableOpacity className="bg-violet-500 px-4 py-1 rounded-sm">
-              <Text className="text-xs font-Regular text-white ">Click Here</Text>
+              <Text className="text-xs font-Regular text-white ">
+                Click Here
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
 
-        <Text className="text-sm  py-3 text-gray font-Bold ">University Map</Text>
+        <Text className="text-sm  py-3 text-gray font-Bold ">
+          University Map
+        </Text>
 
         <Image
           className="h-56 w-full rounded-md"
