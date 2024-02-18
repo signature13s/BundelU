@@ -23,7 +23,7 @@ const Tabs = () => {
         headerShown:false
       }}>
       <Tab.Screen
-        name="Home"
+        name="StudentHome"
         component={Home}
         options={{
           tabBarIcon: ({color, size}) => {
