@@ -7,31 +7,37 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Alert,
 } from 'react-native';
 import React, {useState} from 'react';
 import firestore from '@react-native-firebase/firestore';
 import {ALERT_TYPE, Dialog} from 'react-native-alert-notification';
-
+import auth from '@react-native-firebase/auth';
 const Register = ({navigation}) => {
   const [email, setemail] = useState('');
   const [phone, setphone] = useState('');
   const [password, setpassword] = useState('');
   const register = async () => {
-    firestore()
-      .collection('Users')
-      .add({
-        email: email,
-        phone: phone,
-        password: password,
-      })
-      .then(() => {
-        Dialog.show({
-          type: ALERT_TYPE.SUCCESS,
-          title: 'Success',
-          textBody: 'Congrats! User create Successfully',
-          button: 'close',
-        });
-      });
+    auth().createUserWithEmailAndPassword(
+      'jane.doe@example.com',
+      'SuperSecretPassword!',
+    );
+    Dialog.show({
+      type: ALERT_TYPE.SUCCESS,
+      title: 'Success',
+      textBody: 'Congrats! User create Successfully',
+      button: 'close',
+    }).catch(error => {
+      if (error.code === 'auth/email-already-in-use') {
+        Alert.alert('That email address is already in use!');
+      }
+
+      if (error.code === 'auth/invalid-email') {
+        cAlert.alert('That email address is invalid!');
+      }
+
+      console.error(error);
+    });
   };
   return (
     <ScrollView>
@@ -49,12 +55,6 @@ const Register = ({navigation}) => {
           placeholder="Enter your Email "
           onChangeText={setemail}
           value={email}
-        />
-        <TextInput
-          className="border-2 px-4 py-2 rounded-lg my-2 mx-8 border-[#c4c5c7] font-Regular text-xs"
-          placeholder="Enter your phone number "
-          onChangeText={setphone}
-          value={phone}
         />
         <TextInput
           className="border-2 px-4 py-2  rounded-lg my-2 mx-8 border-[#c4c5c7] font-Regular text-xs"
