@@ -9,35 +9,77 @@ import {
   View,
   Alert,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import firestore from '@react-native-firebase/firestore';
 import {ALERT_TYPE, Dialog} from 'react-native-alert-notification';
 import auth from '@react-native-firebase/auth';
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const Register = ({navigation}) => {
   const [email, setemail] = useState('');
-  const [phone, setphone] = useState('');
+  const [userInfo, setuserInfo] = useState({});
   const [password, setpassword] = useState('');
-  const register = async () => {
-    auth().createUserWithEmailAndPassword(
-      'jane.doe@example.com',
-      'SuperSecretPassword!',
-    );
-    Dialog.show({
-      type: ALERT_TYPE.SUCCESS,
-      title: 'Success',
-      textBody: 'Congrats! User create Successfully',
-      button: 'close',
-    }).catch(error => {
-      if (error.code === 'auth/email-already-in-use') {
-        Alert.alert('That email address is already in use!');
-      }
 
-      if (error.code === 'auth/invalid-email') {
-        cAlert.alert('That email address is invalid!');
-      }
-
-      console.error(error);
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId:
+        '154655169375-p0ad0tjpa363tvvrk92op436420qt17d.apps.googleusercontent.com',
     });
+  }, []);
+
+  const signIn = async () => {
+    try {
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+      await AsyncStorage.setItem(userInfo);
+      setuserInfo({userInfo});
+    } catch (error) {
+      if (isErrorWithCode(error)) {
+        switch (error.code) {
+          case statusCodes.SIGN_IN_CANCELLED:
+            // user cancelled the login flow
+            break;
+          case statusCodes.IN_PROGRESS:
+            // operation (eg. sign in) already in progress
+            break;
+          case statusCodes.PLAY_SERVICES_NOT_AVAILABLE:
+            // play services not available or outdated
+            break;
+          default:
+          // some other error happened
+        }
+      } else {
+        // an error that's not related to google sign in occurred
+      }
+    }
+  };
+
+  const register = () => {
+    auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        Dialog.show({
+          type: ALERT_TYPE.SUCCESS,
+          title: 'Success',
+          textBody: 'Congrats! User create Successfully',
+          button: 'close',
+        }).catch(error => {
+          if (error.code === 'auth/email-already-in-use') {
+            Alert.alert('That email address is already in use!');
+          }
+
+          if (error.code === 'auth/invalid-email') {
+            Alert.alert('That email address is invalid!');
+          }
+
+          console.error(error);
+        });
+      });
   };
   return (
     <ScrollView>
@@ -76,9 +118,7 @@ const Register = ({navigation}) => {
           --------------or continue with-------------
         </Text>
         <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('Login');
-          }}
+          onPress={signIn}
           className="rounded-lg  my-4 px-2 py-1 border-2 mx-8 flex flex-row justify-evenly border-[#c4c5c7] ">
           <Image
             className="h-8 w-8"
