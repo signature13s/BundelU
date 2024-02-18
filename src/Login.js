@@ -50,7 +50,7 @@ const Login = ({navigation}) => {
           button: 'close',
         });
         await AsyncStorage.setItem('userId', user.user.uid);
-        // navigation.navigate('Home');
+        navigation.navigate('Home');
       })
       .catch(error => {
         Alert.alert(error.message);
