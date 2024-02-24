@@ -2,11 +2,20 @@ import {Dimensions, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import Pdf from 'react-native-pdf';
 
-
 const PdfViewer = ({navigation, route}) => {
   const {source} = route.params;
-
-  return <Pdf source={source} style={styles.pdf} />;
+  return (
+    <View style={styles.container}>
+      <Pdf
+        trustAllCerts={false}
+        source={{
+          uri: source,
+          cache: true,
+        }}
+        style={styles.pdf}
+      />
+    </View>
+  );
 };
 
 export default PdfViewer;

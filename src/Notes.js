@@ -36,10 +36,12 @@ const Notes = ({navigation}) => {
         }}>Add Notes</Text> */}
       </View>
 
-      {documents.map(value => {
-        console.log(value)
+      {documents.map((value, index) => {
         return (
-          <View className=" bg-white drop-shadow-xl rounded-lg flex-row justify-start mx-5 my-5   ">
+          <View
+            className=" bg-white drop-shadow-xl rounded-lg flex-row justify-start mx-5 my-5   "
+            key={value?.id}
+            style={{marginBottom: index == documents.length - 1 ? 70 : 0}}>
             <Image
               source={require('../assets/images/notes.jpeg')}
               resizeMode="contain"

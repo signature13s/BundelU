@@ -28,7 +28,7 @@ const Placements = () => {
       {documents &&
         documents.map(value => {
           return (
-            <View className="bg-slate-100 p-2 my-2 rounded-md">
+            <View className="bg-slate-100 p-2 my-2 rounded-md" key={value?.id}>
               <Text className="font-Regular">{value?.company_name}</Text>
               <Text className="font-Regular">{value?.job_description}</Text>
               <Text className="font-Regular">{value?.package}</Text>
