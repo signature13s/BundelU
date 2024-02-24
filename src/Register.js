@@ -12,9 +12,7 @@ import {
 import React, {useEffect, useState} from 'react';
 import {ALERT_TYPE, Dialog} from 'react-native-alert-notification';
 import auth from '@react-native-firebase/auth';
-import {
-  GoogleSignin,
-} from '@react-native-google-signin/google-signin';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Register = ({navigation}) => {
@@ -80,14 +78,14 @@ const Register = ({navigation}) => {
         </Text>
         <TextInput
           className="border-2 px-4 py-2  rounded-lg  my-2 mx-8 border-[#c4c5c7] font-Regular text-xs text-black placeholder-black"
-          placeholderTextColor={"gray"}
+          placeholderTextColor={'gray'}
           placeholder="Enter your Email "
           onChangeText={setemail}
           value={email}
         />
         <TextInput
           className="border-2 px-4 py-2  rounded-lg my-2 mx-8 border-[#c4c5c7] font-Regular text-xs text-black  placeholder-black"
-          placeholderTextColor={"gray"}
+          placeholderTextColor={'gray'}
           placeholder="Enter your password "
           onChangeText={setpassword}
           value={password}

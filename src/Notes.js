@@ -1,34 +1,70 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Image} from 'react-native-animatable';
+import firestore from '@react-native-firebase/firestore';
 
-const Notes = () => {
+const Notes = ({navigation}) => {
+  const [documents, setDocuments] = useState([]);
+
+  useEffect(() => {
+    const unsubscribe = firestore()
+      .collection('notes')
+      .onSnapshot(querySnapshot => {
+        const documentsArray = [];
+        querySnapshot.forEach(documentSnapshot => {
+          documentsArray.push({
+            id: documentSnapshot.id,
+            ...documentSnapshot.data(),
+          });
+        });
+        setDocuments(documentsArray);
+      });
+
+    // Unsubscribe from snapshot listener when component unmounts
+    return () => unsubscribe();
+  }, []);
+
   return (
     <View className=" flex-1">
-      <View className="flex flex-row justify-between px-5 py-2 items-center bg-slate-200 ">
-        <Text className="text-primary text-lg text-left ">
+      <View className="flex flex-row justify-between px-5 py-3 items-center bg-slate-200 ">
+        <Text className="text-primary text-2xl text-left font-Bold ">
           BU<Text className="text-black">NDEL U</Text>
         </Text>
 
-        <Text className=" text-center font-semibold">PYQ & NOTES</Text>
+        {/* <Text className=" text-center font-semibold" onPress={()=>{
+            navigation.navigate('Addn')
+        }}>Add Notes</Text> */}
       </View>
 
-      <View className=" bg-white drop-shadow-xl rounded-lg flex-row justify-start mx-5 my-5   ">
-        <Image
-          source={require('../assets/images/notes.jpeg')}
-          resizeMode="contain"
-          className=" h-24 w-24 ml-2"
-        />
+      {documents.map((value, index) => {
+        return (
+          <View
+            className=" bg-white drop-shadow-xl rounded-lg flex-row justify-start mx-5 my-5   "
+            key={value?.id}
+            style={{marginBottom: index == documents.length - 1 ? 70 : 0}}>
+            <Image
+              source={require('../assets/images/notes.jpeg')}
+              resizeMode="contain"
+              className=" h-24 w-24 ml-2"
+            />
 
-        <View className="flex pl-5 ml-5 ">
-          <Text className="my-3  text-black text-lg font-mono">
-            Data Structure
-          </Text>
-          <TouchableOpacity className="bg-primary  px-6 py-2 rounded-lg ">
-            <Text className="text-white"> Click Here</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+            <View className="flex pl-5 ml-5 ">
+              <Text className="my-3  text-black text-lg font-mono">
+                {value?.title}
+              </Text>
+              <TouchableOpacity
+                className="bg-primary  px-6 py-2 rounded-lg "
+                onPress={() => {
+                  navigation.navigate('PdfViewer', {
+                    source: value?.url,
+                  });
+                }}>
+                <Text className="text-white"> Click Here</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        );
+      })}
     </View>
   );
 };

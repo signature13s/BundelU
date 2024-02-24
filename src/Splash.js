@@ -1,13 +1,17 @@
 import {Image, StyleSheet, Text, View} from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import * as Animatable from 'react-native-animatable';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {UserAuthContext} from './AuthContext';
 
 const Splash = ({navigation, route}) => {
   const checkUser = async () => {
-    const userId = await AsyncStorage.getItem('userId');
-    if (userId == null) {
+    const User = await AsyncStorage.getItem('userId');
+    const userType = await AsyncStorage.getItem('userType');
+    if (User == null && userType == null) {
       navigation.navigate('Onboarding');
+    } else if (userType == 'admin' && User) {
+      navigation.navigate('AdminHome');
     } else {
       navigation.navigate('Home');
     }
@@ -15,7 +19,7 @@ const Splash = ({navigation, route}) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      checkUser()
+      checkUser();
     }, 3000);
 
     return () => clearTimeout(timer);

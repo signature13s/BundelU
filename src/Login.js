@@ -11,13 +11,15 @@ import {
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {ALERT_TYPE, Dialog} from 'react-native-alert-notification';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {UserAuthContext} from './AuthContext';
 
 const Login = ({navigation}) => {
   const [email, setemail] = useState('');
   const [password, setpassword] = useState('');
+  const {getUser} = useContext(UserAuthContext);
 
   useEffect(() => {
     GoogleSignin.configure({
@@ -33,10 +35,12 @@ const Login = ({navigation}) => {
       if (userInfo) {
         Alert.alert('Login Successfully');
         await AsyncStorage.setItem('userId', userInfo.user.id);
+        await AsyncStorage.setItem('userType', 'student');
         navigation.navigate('Home');
+        getUser();
       }
     } catch (error) {
-      Alert.alert(error.message); 
+      Alert.alert(error.message);
     }
   };
 
@@ -51,6 +55,8 @@ const Login = ({navigation}) => {
           button: 'close',
         });
         await AsyncStorage.setItem('userId', user.user.uid);
+        await AsyncStorage.setItem('userType', 'student');
+        getUser();
         navigation.navigate('Home');
       })
       .catch(error => {
