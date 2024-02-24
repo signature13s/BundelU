@@ -32,7 +32,7 @@ import {
     return (
       <View className="bg-white flex-1">
         <Text className="text-center font-bold text-violet-600 text-lg my-2">
-          BUNDEL U
+        BU<Text className='text-black'>NDEL U</Text>
         </Text>
         <View className="relative flex-row justify-center my-2">
           <Image
@@ -95,7 +95,9 @@ import {
             
         <TouchableOpacity 
           className="p-4 rounded-md bg-purple-600"
-        >
+         onPress={()=>{
+          navigation.navigate("Account");
+         }}>
           <Text className="text-center text-white font-semibold">Save</Text>
         </TouchableOpacity>
              </View>
