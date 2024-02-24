@@ -18,6 +18,8 @@ import {UserAuthContextProvider} from './src/AuthContext';
 import Tabs from './src/Tabs';
 import PdfViewer from './src/PdfViewer';
 import Edit from './src/Edit';
+import Personalinfo from './src/Personalinfo';
+
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -48,6 +50,7 @@ const App = () => {
             <Stack.Screen name="AdminHome" component={AdminHome} />
             <Stack.Screen name="PdfViewer" component={PdfViewer} />
             <Stack.Screen name="Edit" component={Edit} />
+            <Stack.Screen name="Personalinfo" component={Personalinfo} />
 
           </Stack.Navigator>
         </AlertNotificationRoot>

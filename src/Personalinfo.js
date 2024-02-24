@@ -16,7 +16,7 @@ import firestore from '@react-native-firebase/firestore';
 // import Edit from './Edit';
 // import ProfileEditForm from './ProfileEditForm';
 
-const Edit = ({navigation}) => {
+const Personalinfo = ({navigation}) => {
   const [Name, setName] = useState('');
   const [Level, setLevel] = useState('');
   const [Address, setAddress] = useState('');
@@ -24,23 +24,22 @@ const Edit = ({navigation}) => {
   const [Email, setEmail] = useState('');
   // const [isEnabled, setIsEnabled] = useState(false);
   // const [isEditFormOpen, setIsEditFormOpen] = useState(false);
-  
- 
-  
 
-  let rerun=()=>{firestore()
-    .collection('Users')
-    .doc(Email)
-    .set({
-      your_name: Name,
-      education_level: Level,
-      address: Address,
-      contact: Number,
-      email: Email,
-    })
-    .then(() => {
-      // console.log(`${name}`)
-    });}
+  let rerun = () => {
+    firestore()
+      .collection('Users')
+      .doc(Email)
+      .set({
+        your_name: Name,
+        education_level: Level,
+        address: Address,
+        contact: Number,
+        email: Email,
+      })
+      .then(() => {
+        // console.log(`${name}`);
+      });
+  };
 
   return (
     <ScrollView className="bg-white flex-1">
@@ -133,8 +132,9 @@ const Edit = ({navigation}) => {
         <TouchableOpacity
           className="p-4 rounded-md bg-purple-600"
           onPress={() => {
-            navigation.navigate('Account');
             rerun();
+
+            navigation.navigate('Login');
           }}>
           <Text className="text-center text-white font-semibold">Save</Text>
         </TouchableOpacity>
@@ -143,6 +143,6 @@ const Edit = ({navigation}) => {
   );
 };
 
-export default Edit;
+export default Personalinfo;
 
 const styles = StyleSheet.create({});

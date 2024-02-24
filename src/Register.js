@@ -14,6 +14,8 @@ import {ALERT_TYPE, Dialog} from 'react-native-alert-notification';
 import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import firestore from '@react-native-firebase/firestore';
+
 
 const Register = ({navigation}) => {
   const [email, setemail] = useState('');
@@ -39,6 +41,15 @@ const Register = ({navigation}) => {
       Alert.alert(error.message);
     }
   };
+  const createuser=()=>{firestore()
+    .collection('Users')
+    .doc(email)
+    .set({
+      email: email,
+    })
+    .then(() => {
+      // console.log(`${name}`);
+    });}
 
   const register = () => {
     auth()
@@ -51,7 +62,7 @@ const Register = ({navigation}) => {
           button: 'close',
         });
 
-        navigation.navigate('Login');
+        navigation.navigate('Personalinfo');
       })
       .catch(error => {
         if (error.code === 'auth/email-already-in-use') {
@@ -95,6 +106,7 @@ const Register = ({navigation}) => {
         <TouchableOpacity
           onPress={() => {
             register();
+            createuser();
           }}
           className="m-6 rounded-lg py-3  mx-8 flex flex-row justify-evenly bg-primary ">
           <Text className="text-xs text-center self-center text-white font-Bold ">
