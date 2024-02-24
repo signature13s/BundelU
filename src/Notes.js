@@ -1,4 +1,4 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View,ScrollView} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {Image} from 'react-native-animatable';
 import firestore from '@react-native-firebase/firestore';
@@ -26,7 +26,7 @@ const Notes = ({navigation}) => {
   }, []);
 
   return (
-    <View className=" flex flex-1 bg-white px-4">
+    <ScrollView className=" flex flex-1 bg-white px-4">
       <Header />
       {documents.map((value, index) => {
         return (
@@ -57,7 +57,7 @@ const Notes = ({navigation}) => {
           </View>
         );
       })}
-    </View>
+    </ScrollView>
   );
 };
 

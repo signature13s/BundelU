@@ -117,7 +117,9 @@ const Account = ({navigation}) => {
             />
           </View>
           <View className="flex-row justify-between">
-            <Text className="text-red-600 text-lg">Logout</Text>
+            <TouchableOpacity onPress={logout}>
+              <Text className="text-red-600 text-lg">Logout</Text>
+              </TouchableOpacity>
           </View>
         </View>
       </View>
