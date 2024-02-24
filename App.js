@@ -4,7 +4,7 @@ import messaging from '@react-native-firebase/messaging';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from './src/Home';
-import AdminHome from "./src/admin/Home"
+import AdminHome from './src/admin/Home';
 import Splash from './src/Splash';
 import Login from './src/Login';
 import Register from './src/Register';

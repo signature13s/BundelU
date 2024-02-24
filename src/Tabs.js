@@ -19,8 +19,8 @@ const Tabs = () => {
       screenOptions={{
         tabBarInactiveTintColor: 'gray',
         tabBarActiveTintColor: '#7B61FF',
-        tabBarStyle:50,
-        headerShown:false
+        tabBarStyle: 50,
+        headerShown: false,
       }}>
       <Tab.Screen
         name="StudentHome"

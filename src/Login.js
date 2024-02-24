@@ -14,7 +14,7 @@ import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import React, {useContext, useEffect, useState} from 'react';
 import {ALERT_TYPE, Dialog} from 'react-native-alert-notification';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { UserAuthContext } from './AuthContext';
+import {UserAuthContext} from './AuthContext';
 
 const Login = ({navigation}) => {
   const [email, setemail] = useState('');
@@ -37,7 +37,7 @@ const Login = ({navigation}) => {
         await AsyncStorage.setItem('userId', userInfo.user.id);
         await AsyncStorage.setItem('userType', 'student');
         navigation.navigate('Home');
-        getUser()
+        getUser();
       }
     } catch (error) {
       Alert.alert(error.message);
@@ -56,7 +56,7 @@ const Login = ({navigation}) => {
         });
         await AsyncStorage.setItem('userId', user.user.uid);
         await AsyncStorage.setItem('userType', 'student');
-        getUser()
+        getUser();
         navigation.navigate('Home');
       })
       .catch(error => {
