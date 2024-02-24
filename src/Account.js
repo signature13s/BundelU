@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+// import Edit from './Edit';
 // import ProfileEditForm from './ProfileEditForm';
 
 const Account = ({navigation}) => {
@@ -88,7 +89,7 @@ const Account = ({navigation}) => {
             <Text className="text-gray ">Email</Text>
             <Text className="text-black">rajsiddhant284@gmail.com</Text>
           </View>
-          <TouchableOpacity
+          <TouchableOpacity onPress={() => navigation.navigate('Edit')}
             className="p-4 rounded-md bg-purple-600"
             // onPress={() => {
             //   setIsEditFormOpen(true);

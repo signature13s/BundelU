@@ -17,6 +17,7 @@ import AdminLogin from './src/admin/Login';
 import {UserAuthContextProvider} from './src/AuthContext';
 import Tabs from './src/Tabs';
 import PdfViewer from './src/PdfViewer';
+import Edit from './src/Edit';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -46,6 +47,8 @@ const App = () => {
             <Stack.Screen name="AdminLogin" component={AdminLogin} />
             <Stack.Screen name="AdminHome" component={AdminHome} />
             <Stack.Screen name="PdfViewer" component={PdfViewer} />
+            <Stack.Screen name="Edit" component={Edit} />
+
           </Stack.Navigator>
         </AlertNotificationRoot>
       </NavigationContainer>
