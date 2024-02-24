@@ -19,13 +19,21 @@ const Tabs = () => {
       screenOptions={{
         tabBarInactiveTintColor: 'gray',
         tabBarActiveTintColor: '#7B61FF',
-        tabBarStyle: 50,
         headerShown: false,
+        tabBarStyle: {
+          paddingBottom: 5,
+          height: 55,
+        },
+        tabBarLabelStyle: {
+          fontSize: 12,
+          fontWeight: '600',
+        },
       }}>
       <Tab.Screen
         name="StudentHome"
         component={Home}
         options={{
+          title: 'Home',
           tabBarIcon: ({color, size}) => {
             return <HomeIcon color={color} size={size} />;
           },

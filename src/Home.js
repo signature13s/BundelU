@@ -7,30 +7,16 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React from 'react';
+import Header from './component/Header';
 
 const Home = ({navigation}) => {
   return (
     <ScrollView className="bg-white flex-1 px-4">
       <View>
-        <View className="flex-row justify-between flex h-16  bg-white items-center py-1">
-          <View className="white flex flex-row items-center">
-            <Text className="text-purple-600 text-xl font-Bold">BU</Text>
-            <Text className=" text-black text-xl font-Bold">NDEL U</Text>
-          </View>
-
-          <TouchableOpacity
-            classname="self-center"
-            onPress={() => {
-              navigation.navigate('Account');
-            }}>
-            <Image
-              className="w-8 h-8 "
-              source={require('../assets/images/bu_logo.png')}
-            />
-          </TouchableOpacity>
-        </View>
-
-        <Text className="text-gray text-sm font-Bold mb-2 ">PYQ & Notes</Text>
+        <Header />
+        <Text className="text-gray text-sm font-Bold my-2 ">
+          Notices / Information
+        </Text>
 
         <View classname="flex flex-auto rounded-md ">
           <Text className="text-black bg-slate-200 py-4 px-4 text-xs font-Regular rounded-lg my-1">
@@ -47,9 +33,7 @@ const Home = ({navigation}) => {
           </Text>
         </View>
 
-        <Text className="text-gray text-sm font-Bold my-2 ">
-          Notice/Informations
-        </Text>
+        <Text className="text-gray text-sm font-Bold my-2 ">PYQ & Notes</Text>
         <View className="bg-slate-100 rounded-md  px-5 flex flex-row items-center py-4 justify-between">
           <Image
             className="h-28 w-28"
@@ -61,8 +45,9 @@ const Home = ({navigation}) => {
               Upload PYQs & Notes
             </Text>
             <TouchableOpacity className="bg-violet-500 px-4 py-1 rounded-sm">
-              <Text className="text-xs font-Regular text-white " onPress={()=>
-              navigation.navigate('Notes')}>
+              <Text
+                className="text-xs font-Regular text-white "
+                onPress={() => navigation.navigate('Notes')}>
                 Click Here
               </Text>
             </TouchableOpacity>
@@ -77,7 +62,6 @@ const Home = ({navigation}) => {
           className="h-56 w-full rounded-md"
           source={require('../assets/images/map.png')}
         />
-
       </View>
     </ScrollView>
   );

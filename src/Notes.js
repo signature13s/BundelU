@@ -2,6 +2,7 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {Image} from 'react-native-animatable';
 import firestore from '@react-native-firebase/firestore';
+import Header from './component/Header';
 
 const Notes = ({navigation}) => {
   const [documents, setDocuments] = useState([]);
@@ -25,27 +26,18 @@ const Notes = ({navigation}) => {
   }, []);
 
   return (
-    <View className=" flex-1">
-      <View className="flex flex-row justify-between px-5 py-3 items-center bg-slate-200 ">
-        <Text className="text-primary text-2xl text-left font-Bold ">
-          BU<Text className="text-black">NDEL U</Text>
-        </Text>
-
-        {/* <Text className=" text-center font-semibold" onPress={()=>{
-            navigation.navigate('Addn')
-        }}>Add Notes</Text> */}
-      </View>
-
+    <View className=" flex flex-1 bg-white px-4">
+      <Header />
       {documents.map((value, index) => {
         return (
           <View
-            className=" bg-white drop-shadow-xl rounded-lg flex-row justify-start mx-5 my-5   "
+            className=" bg-slate-100 drop-shadow-xl rounded-lg flex-row justify-start  my-5   "
             key={value?.id}
             style={{marginBottom: index == documents.length - 1 ? 70 : 0}}>
             <Image
               source={require('../assets/images/notes.jpeg')}
               resizeMode="contain"
-              className=" h-24 w-24 ml-2"
+              className=" h-24 w-20 ml-2 rounded-md"
             />
 
             <View className="flex pl-5 ml-5 ">

@@ -1,13 +1,14 @@
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import firestore from '@react-native-firebase/firestore';
+import Header from './component/Header';
 
 const Placements = () => {
   const [documents, setDocuments] = useState([]);
 
   useEffect(() => {
     const unsubscribe = firestore()
-      .collection('Placement')
+      .collection('placements')
       .onSnapshot(querySnapshot => {
         const documentsArray = [];
         querySnapshot.forEach(documentSnapshot => {
@@ -25,6 +26,7 @@ const Placements = () => {
 
   return (
     <ScrollView className="flex flex-1 bg-white px-4">
+      <Header />
       {documents &&
         documents.map(value => {
           return (
