@@ -73,8 +73,8 @@ const Login = ({navigation}) => {
             className="flex m-auto w-28 h-28 mt-5"
           />
 
-          <Text className="m-auto text-3xl text-primary font-Regular my-5">
-            BUNDEL U
+          <Text className="text-3xl text-center font-Bold text-primary m-4  mt-3">
+            BU<Text className='text-black'>NDEL U</Text>
           </Text>
         </View>
 

@@ -74,7 +74,8 @@ const Register = ({navigation}) => {
           resizeMode="contain"
         />
         <Text className=" text-3xl text-center font-Bold text-primary m-4  mt-3">
-          BUNDEL U
+        BU<Text className='text-black'>NDEL U</Text>
+          
         </Text>
         <TextInput
           className="border-2 px-4 py-2  rounded-lg  my-2 mx-8 border-[#c4c5c7] font-Regular text-xs text-black placeholder-black"

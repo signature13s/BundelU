@@ -43,7 +43,7 @@ const Splash = ({navigation, route}) => {
           duration={2000}
           direction="alternate"
           className="text-center font-bold text-violet-600 text-lg mt-5">
-          Bundel U
+          BU<Text className='text-black'>NDEL U</Text>
         </Animatable.Text>
         {/* <Text className="text-center font-bold text-violet-600 text-lg">
           Bundel U

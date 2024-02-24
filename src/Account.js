@@ -30,7 +30,7 @@ const Account = ({navigation}) => {
         }} />
       )} */}
       <Text className="text-center font-bold text-violet-600 text-lg my-2">
-        BUNDEL U
+      BU<Text className='text-black'>NDEL U</Text>
       </Text>
       <View className="relative flex-row justify-center my-2">
         {/* <Image

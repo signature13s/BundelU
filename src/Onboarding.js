@@ -30,11 +30,11 @@ const Onboarding = ({navigation}) => {
 
         <View className="absolute top-24 flex flex-row  w-full  justify-center">
           <Animatable.Text animation="zoomInDown">
-            <Text className="text-primary font-Regular font-bold text-4xl   opacity-100 text-center  ">
+            <Text className="text-primary  font-Bold text-4xl   opacity-100 text-center  ">
               BU
-            </Text>
-            <Text className=" font-bold text-4xl   text-black opacity-100  font-Regular ">
+            <Text className="   text-black opacity-100  font-Regular ">
               NDEL U
+            </Text>
             </Text>
           </Animatable.Text>
         </View>
