@@ -1,13 +1,4 @@
-import {
-  Button,
-  Image,
-  ImageBackground,
-  StyleSheet,
-  Text,
-  Touchable,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import * as Animatable from 'react-native-animatable';
 
@@ -32,9 +23,9 @@ const Onboarding = ({navigation}) => {
           <Animatable.Text animation="zoomInDown">
             <Text className="text-primary  font-Bold text-4xl   opacity-100 text-center  ">
               BU
-            <Text className="   text-black opacity-100  font-Regular ">
-              NDEL U
-            </Text>
+              <Text className="   text-black opacity-100  font-Regular ">
+                NDEL U
+              </Text>
             </Text>
           </Animatable.Text>
         </View>
@@ -54,7 +45,7 @@ const Onboarding = ({navigation}) => {
         <TouchableOpacity
           className="bg-primary   py-4  rounded-xl"
           onPress={() => {
-            navigation.navigate('ChooseType');
+            navigation.navigate('Login');
           }}>
           <Text className="text-white text-center font-Bold ">Continue</Text>
         </TouchableOpacity>

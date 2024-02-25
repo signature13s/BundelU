@@ -35,8 +35,6 @@ const Login = ({navigation}) => {
       if (userInfo) {
         Alert.alert('Login Successfully');
         await AsyncStorage.setItem('userId', userInfo.user.id);
-        await AsyncStorage.setItem('userType', 'student');
-        navigation.navigate('Home');
         getUser();
       }
     } catch (error) {
@@ -57,7 +55,6 @@ const Login = ({navigation}) => {
         await AsyncStorage.setItem('userId', user.user.uid);
         await AsyncStorage.setItem('userType', 'student');
         getUser();
-        navigation.navigate('Home');
       })
       .catch(error => {
         Alert.alert(error.message);
@@ -74,7 +71,7 @@ const Login = ({navigation}) => {
           />
 
           <Text className="text-3xl text-center font-Bold text-primary m-4  mt-3">
-            BU<Text className='text-black'>NDEL U</Text>
+            BU<Text className="text-black">NDEL U</Text>
           </Text>
         </View>
 

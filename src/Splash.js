@@ -1,30 +1,8 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
-import React, {useContext, useEffect} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import React from 'react';
 import * as Animatable from 'react-native-animatable';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {UserAuthContext} from './AuthContext';
 
-const Splash = ({navigation, route}) => {
-  const checkUser = async () => {
-    const User = await AsyncStorage.getItem('userId');
-    const userType = await AsyncStorage.getItem('userType');
-    if (User == null && userType == null) {
-      navigation.navigate('Onboarding');
-    } else if (userType == 'admin' && User) {
-      navigation.navigate('AdminHome');
-    } else {
-      navigation.navigate('Home');
-    }
-  };
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      checkUser();
-    }, 3000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
+const Splash = () => {
   return (
     <View className="flex bg-white justify-center items-center h-full">
       <View>
@@ -43,7 +21,7 @@ const Splash = ({navigation, route}) => {
           duration={2000}
           direction="alternate"
           className="text-center font-bold text-violet-600 text-lg mt-5">
-          BU<Text className='text-black'>NDEL U</Text>
+          BU<Text className="text-black">NDEL U</Text>
         </Animatable.Text>
         {/* <Text className="text-center font-bold text-violet-600 text-lg">
           Bundel U

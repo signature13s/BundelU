@@ -5,11 +5,35 @@ import {
   Text,
   View,
   TouchableOpacity,
+  BackHandler,
+  Alert,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import Header from './component/Header';
 
 const Home = ({navigation}) => {
+  useEffect(() => {
+    const unsuscribe = navigation.addListener('beforeRemove', e => {
+      e.preventDefault();
+      Alert.alert('Alert ', 'Are you want to exit the App ?', [
+        {
+          text: 'Cancel',
+          onPress: () => {
+            return true;
+          },
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: () => {
+            BackHandler.exitApp();
+          },
+        },
+      ]);
+    });
+    return unsuscribe;
+  }, [navigation]);
+
   return (
     <ScrollView className="bg-white flex-1 px-4">
       <View>

@@ -7,31 +7,37 @@ import {
   Image,
   TouchableOpacity,
   Switch,
+  ScrollView,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {UserAuthContext} from './AuthContext';
 // import Edit from './Edit';
 // import ProfileEditForm from './ProfileEditForm';
 
 const Account = ({navigation}) => {
   const [isEnabled, setIsEnabled] = useState(false);
   // const [isEditFormOpen, setIsEditFormOpen] = useState(false);
+
+  const {getUser} = useContext(UserAuthContext);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
   const logout = async () => {
     await AsyncStorage.removeItem('userId');
+    getUser();
     Alert.alert('Logout Done !');
-    navigation.navigate('Login');
   };
   return (
-    <View className="bg-white flex-1">
+    <ScrollView
+      className="bg-white flex-1"
+      showsVerticalScrollIndicator={false}>
       {/* {isEditFormOpen && (
         <ProfileEditForm close={() => {
           setIsEditFormOpen(false)
         }} />
       )} */}
       <Text className="text-center font-bold text-violet-600 text-lg my-2">
-      BU<Text className='text-black'>NDEL U</Text>
+        BU<Text className="text-black">NDEL U</Text>
       </Text>
       <View className="relative flex-row justify-center my-2">
         {/* <Image
@@ -89,7 +95,8 @@ const Account = ({navigation}) => {
             <Text className="text-gray ">Email</Text>
             <Text className="text-black">rajsiddhant284@gmail.com</Text>
           </View>
-          <TouchableOpacity onPress={() => navigation.navigate('Edit')}
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Edit')}
             className="p-4 rounded-md bg-purple-600"
             // onPress={() => {
             //   setIsEditFormOpen(true);
@@ -120,11 +127,11 @@ const Account = ({navigation}) => {
           <View className="flex-row justify-between">
             <TouchableOpacity onPress={logout}>
               <Text className="text-red-600 text-lg">Logout</Text>
-              </TouchableOpacity>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

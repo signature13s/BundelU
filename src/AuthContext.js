@@ -3,8 +3,7 @@ const UserAuthContext = React.createContext();
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const UserAuthContextProvider = ({children}) => {
-  const [User, setUser] = useState('');
-  const [userType, setuserType] = useState('student');
+  const [authenticated, setauthenticated] = useState(false);
 
   useEffect(() => {
     getUser();
@@ -12,27 +11,20 @@ const UserAuthContextProvider = ({children}) => {
 
   function getUser() {
     AsyncStorage.getItem('userId').then(value => {
-      setUser(value);
-    });
-
-    AsyncStorage.getItem('userType').then(value => {
       if (value == null) {
-        setuserType('student');
+        setauthenticated(false);
       } else {
-        setuserType(value);
+        setauthenticated(value);
       }
     });
   }
 
   const logout = async () => {
     await AsyncStorage.removeItem('userId');
-    await AsyncStorage.removeItem('userType');
-    setUser(null);
-    setuserType('student');
+    setauthenticated(false);
   };
   return (
-    <UserAuthContext.Provider
-      value={{User, getUser, userType, logout, setuserType}}>
+    <UserAuthContext.Provider value={{authenticated, getUser, logout}}>
       {children}
     </UserAuthContext.Provider>
   );
