@@ -38,6 +38,7 @@ const Edit = ({navigation}) => {
         address: Address,
         contact: Number,
         contact_email: Email,
+        verified: true,
       })
       .then(() => {
         Alert.alert('Profile Updated');

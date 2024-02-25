@@ -8,11 +8,17 @@ import {
   BackHandler,
   Alert,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Header from './component/Header';
 import firestore from '@react-native-firebase/firestore';
+import {UserAuthContext} from './AuthContext';
+import {useIsFocused} from '@react-navigation/native';
+
 const Home = ({navigation}) => {
   const [documents, setDocuments] = useState([]);
+  const Focused = useIsFocused();
+
+  const {authenticated} = useContext(UserAuthContext);
 
   useEffect(() => {
     const unsuscribe = navigation.addListener('beforeRemove', e => {
@@ -39,6 +45,8 @@ const Home = ({navigation}) => {
   useEffect(() => {
     const unsubscribe = firestore()
       .collection('notice')
+      .limit(4)
+      .orderBy('createdAt', 'desc')
       .onSnapshot(querySnapshot => {
         const documentsArray = [];
         querySnapshot.forEach(documentSnapshot => {
@@ -53,6 +61,23 @@ const Home = ({navigation}) => {
     // Unsubscribe from snapshot listener when component unmounts
     return () => unsubscribe();
   }, []);
+
+  const chekUser = () => {
+    firestore()
+      .collection('user')
+      .doc(authenticated)
+      .get()
+      .then(value => {
+        const verified = value.data().verified;
+        if (!verified) {
+          navigation.navigate('Edit');
+        }
+      });
+  };
+
+  useEffect(() => {
+    chekUser();
+  }, [Focused]);
 
   return (
     <ScrollView className="bg-white flex-1 px-4">
