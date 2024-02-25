@@ -10,9 +10,10 @@ import {
   TextInput,
   ScrollView,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
+import {UserAuthContext} from './AuthContext';
 // import Edit from './Edit';
 // import ProfileEditForm from './ProfileEditForm';
 
@@ -22,25 +23,46 @@ const Edit = ({navigation}) => {
   const [Address, setAddress] = useState('');
   const [Number, setNumber] = useState(1);
   const [Email, setEmail] = useState('');
+
+  const {authenticated} = useContext(UserAuthContext);
   // const [isEnabled, setIsEnabled] = useState(false);
   // const [isEditFormOpen, setIsEditFormOpen] = useState(false);
-  
- 
-  
 
-  let rerun=()=>{firestore()
-    .collection('Users')
-    .doc(Email)
-    .set({
-      your_name: Name,
-      education_level: Level,
-      address: Address,
-      contact: Number,
-      email: Email,
-    })
-    .then(() => {
-      // console.log(`${name}`)
-    });}
+  let rerun = () => {
+    firestore()
+      .collection('user')
+      .doc(authenticated)
+      .update({
+        name: Name,
+        education_level: Level,
+        address: Address,
+        contact: Number,
+        contact_email: Email,
+      })
+      .then(() => {
+        Alert.alert('Profile Updated');
+      });
+  };
+
+  const getProfileData = () => {
+    firestore()
+      .collection('user')
+      .doc(authenticated)
+      .get()
+      .then(value => {
+        const data = value.data();
+
+        setName(data?.name);
+        setAddress(data?.address);
+        setLevel(data?.education_level);
+        setEmail(data?.contact_email);
+        setNumber(data?.contact);
+      });
+  };
+
+  useEffect(() => {
+    getProfileData();
+  }, []);
 
   return (
     <ScrollView className="bg-white flex-1">
@@ -68,33 +90,29 @@ const Edit = ({navigation}) => {
           </Text>
         </View>
         <View className="flex gap-5 p-2">
-          <View className="flex-row justify-between">
-            <TextInput
-              className="text-black py-1"
-              placeholder="Your Name"
-              keyboardType="name-phone-pad"
-              value={Name}
-              onChangeText={setName}
-            />
-          </View>
-          <View className="flex-row justify-between">
-            <TextInput
-              className="text-black py-1"
-              placeholder="Education level"
-              keyboardType="name-phone-pad"
-              value={Level}
-              onChangeText={setLevel}
-            />
-          </View>
-          <View className="flex-row justify-between">
-            <TextInput
-              className="text-black py-1"
-              placeholder="Your Address"
-              keyboardType="default"
-              value={Address}
-              onChangeText={setAddress}
-            />
-          </View>
+          <TextInput
+            className="text-black py-1 "
+            placeholder="Your Name"
+            keyboardType="name-phone-pad"
+            value={Name}
+            onChangeText={setName}
+          />
+
+          <TextInput
+            className="text-black py-1"
+            placeholder="Education level"
+            keyboardType="name-phone-pad"
+            value={Level}
+            onChangeText={setLevel}
+          />
+
+          <TextInput
+            className="text-black py-1"
+            placeholder="Your Address"
+            keyboardType="default"
+            value={Address}
+            onChangeText={setAddress}
+          />
         </View>
       </View>
       <View
@@ -106,25 +124,22 @@ const Edit = ({navigation}) => {
           </Text>
         </View>
         <View className="flex gap-5 p-2">
-          <View className="flex-row justify-between">
-            <TextInput
-              className="text-black py-1"
-              placeholder="Phone"
-              keyboardType="number-pad"
-              maxLength={10}
-              value={Number}
-              onChangeText={setNumber}
-            />
-          </View>
-          <View className="flex-row justify-between">
-            <TextInput
-              className="text-black py-1"
-              placeholder="Your E-mail"
-              keyboardType="email-address"
-              value={Email}
-              onChangeText={setEmail}
-            />
-          </View>
+          <TextInput
+            className="text-black py-1"
+            placeholder="Phone"
+            keyboardType="number-pad"
+            maxLength={10}
+            value={Number}
+            onChangeText={setNumber}
+          />
+
+          <TextInput
+            className="text-black py-1"
+            placeholder="Your E-mail"
+            keyboardType="email-address"
+            value={Email}
+            onChangeText={setEmail}
+          />
         </View>
       </View>
       <View

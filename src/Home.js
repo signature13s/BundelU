@@ -8,10 +8,12 @@ import {
   BackHandler,
   Alert,
 } from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import Header from './component/Header';
-
+import firestore from '@react-native-firebase/firestore';
 const Home = ({navigation}) => {
+  const [documents, setDocuments] = useState([]);
+
   useEffect(() => {
     const unsuscribe = navigation.addListener('beforeRemove', e => {
       e.preventDefault();
@@ -34,6 +36,24 @@ const Home = ({navigation}) => {
     return unsuscribe;
   }, [navigation]);
 
+  useEffect(() => {
+    const unsubscribe = firestore()
+      .collection('notice')
+      .onSnapshot(querySnapshot => {
+        const documentsArray = [];
+        querySnapshot.forEach(documentSnapshot => {
+          documentsArray.push({
+            id: documentSnapshot.id,
+            ...documentSnapshot.data(),
+          });
+        });
+        setDocuments(documentsArray);
+      });
+
+    // Unsubscribe from snapshot listener when component unmounts
+    return () => unsubscribe();
+  }, []);
+
   return (
     <ScrollView className="bg-white flex-1 px-4">
       <View>
@@ -43,18 +63,18 @@ const Home = ({navigation}) => {
         </Text>
 
         <View classname="flex flex-auto rounded-md ">
-          <Text className="text-black bg-slate-200 py-4 px-4 text-xs font-Regular rounded-lg my-1">
-            Sessional of DataMining -- Shift2
-          </Text>
-          <Text className="text-black bg-slate-200 py-4 px-4 text-xs font-Regular  rounded-lg my-1">
-            Sessional of DataMining -- Shift2
-          </Text>
-          <Text className="text-black bg-slate-200 py-4 px-4 text-xs font-Regular  rounded-lg my-1">
-            Sessional of DataMining -- Shift2
-          </Text>
-          <Text className="text-black bg-slate-200 py-4 px-4 text-xs font-Regular  rounded-lg my-1">
-            Sessional of DataMining -- Shift2
-          </Text>
+          {documents &&
+            documents.map(value => {
+              return (
+                <View
+                  className="bg-sky-500 p-2 my-2 rounded-md"
+                  key={value?.id}>
+                  <Text className="font-Regular text-white text-xs">
+                    {value?.title}
+                  </Text>
+                </View>
+              );
+            })}
         </View>
 
         <Text className="text-gray text-sm font-Bold my-2 ">PYQ & Notes</Text>
@@ -66,7 +86,7 @@ const Home = ({navigation}) => {
 
           <View className="flex flex-col space-y-4  items-center justify-center">
             <Text className="text-sm  text-center text-primary font-Bold">
-              Upload PYQs & Notes
+              PYQs & Notes
             </Text>
             <TouchableOpacity className="bg-violet-500 px-4 py-1 rounded-sm">
               <Text

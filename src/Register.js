@@ -16,7 +16,6 @@ import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
 
-
 const Register = ({navigation}) => {
   const [email, setemail] = useState('');
   const [password, setpassword] = useState('');
@@ -41,28 +40,26 @@ const Register = ({navigation}) => {
       Alert.alert(error.message);
     }
   };
-  const createuser=()=>{firestore()
-    .collection('Users')
-    .doc(email)
-    .set({
-      email: email,
-    })
-    .then(() => {
-      // console.log(`${name}`);
-    });}
 
   const register = () => {
     auth()
       .createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        Dialog.show({
-          type: ALERT_TYPE.SUCCESS,
-          title: 'Success',
-          textBody: 'Account Created ! Please Login',
-          button: 'close',
-        });
-
-        navigation.navigate('Personalinfo');
+      .then(user => {
+        firestore()
+          .collection('user')
+          .doc(user.user.uid)
+          .set({
+            email: email,
+          })
+          .then(() => {
+            Dialog.show({
+              type: ALERT_TYPE.SUCCESS,
+              title: 'Success',
+              textBody: 'Account Created ! Please Login',
+              button: 'close',
+            });
+            navigation.navigate('Login');
+          });
       })
       .catch(error => {
         if (error.code === 'auth/email-already-in-use') {
@@ -85,8 +82,7 @@ const Register = ({navigation}) => {
           resizeMode="contain"
         />
         <Text className=" text-3xl text-center font-Bold text-primary m-4  mt-3">
-        BU<Text className='text-black'>NDEL U</Text>
-          
+          BU<Text className="text-black">NDEL U</Text>
         </Text>
         <TextInput
           className="border-2 px-4 py-2  rounded-lg  my-2 mx-8 border-[#c4c5c7] font-Regular text-xs text-black placeholder-black"
@@ -104,10 +100,7 @@ const Register = ({navigation}) => {
           secureTextEntry
         />
         <TouchableOpacity
-          onPress={() => {
-            register();
-            createuser();
-          }}
+          onPress={register}
           className="m-6 rounded-lg py-3  mx-8 flex flex-row justify-evenly bg-primary ">
           <Text className="text-xs text-center self-center text-white font-Bold ">
             Sign Up

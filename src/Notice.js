@@ -30,8 +30,10 @@ const Notice = () => {
       {documents &&
         documents.map(value => {
           return (
-            <View className="bg-slate-100 p-2 my-2 rounded-md" key={value?.id}>
-              <Text className="font-Regular">{value?.title}</Text>
+            <View className="bg-sky-500 p-2 my-2 rounded-md" key={value?.id}>
+              <Text className="font-Regular text-white text-xs">
+                {value?.title}
+              </Text>
             </View>
           );
         })}

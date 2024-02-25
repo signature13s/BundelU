@@ -9,17 +9,16 @@ import {
   Switch,
   ScrollView,
 } from 'react-native';
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {UserAuthContext} from './AuthContext';
-// import Edit from './Edit';
-// import ProfileEditForm from './ProfileEditForm';
+import firestore from '@react-native-firebase/firestore';
 
 const Account = ({navigation}) => {
   const [isEnabled, setIsEnabled] = useState(false);
-  // const [isEditFormOpen, setIsEditFormOpen] = useState(false);
+  const [profileData, setprofileData] = useState({});
 
-  const {getUser} = useContext(UserAuthContext);
+  const {getUser, authenticated} = useContext(UserAuthContext);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
   const logout = async () => {
@@ -27,6 +26,15 @@ const Account = ({navigation}) => {
     getUser();
     Alert.alert('Logout Done !');
   };
+
+  const getProfileData = async () => {
+    const data = await firestore().collection('user').doc(authenticated).get();
+    setprofileData(data.data());
+  };
+
+  useEffect(() => {
+    getProfileData();
+  }, []);
   return (
     <ScrollView
       className="bg-white flex-1"
@@ -66,15 +74,15 @@ const Account = ({navigation}) => {
         <View className="flex gap-5 p-2">
           <View className="flex-row justify-between">
             <Text className="text-gray ">Your Name</Text>
-            <Text className="text-black">Siddhant Raj</Text>
+            <Text className="text-black">{profileData?.name}</Text>
           </View>
           <View className="flex-row justify-between">
             <Text className="text-gray ">Education Level</Text>
-            <Text className="text-black">Bachelor</Text>
+            <Text className="text-black">{profileData?.education_level}</Text>
           </View>
           <View className="flex-row justify-between">
             <Text className="text-gray ">Address</Text>
-            <Text className="text-black">Jhansi, Uttar Pradesh</Text>
+            <Text className="text-black">{profileData?.address}</Text>
           </View>
         </View>
       </View>
@@ -89,11 +97,11 @@ const Account = ({navigation}) => {
         <View className="flex gap-5 p-2">
           <View className="flex-row justify-between">
             <Text className="text-gray ">Phone number</Text>
-            <Text className="text-black">+91 8303109832</Text>
+            <Text className="text-black">+91 {profileData?.contact}</Text>
           </View>
           <View className="flex-row justify-between">
             <Text className="text-gray ">Email</Text>
-            <Text className="text-black">rajsiddhant284@gmail.com</Text>
+            <Text className="text-black">{profileData?.contact_email}</Text>
           </View>
           <TouchableOpacity
             onPress={() => navigation.navigate('Edit')}

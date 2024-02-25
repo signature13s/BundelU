@@ -53,7 +53,6 @@ const Login = ({navigation}) => {
           button: 'close',
         });
         await AsyncStorage.setItem('userId', user.user.uid);
-        await AsyncStorage.setItem('userType', 'student');
         getUser();
       })
       .catch(error => {

@@ -11,7 +11,6 @@ import {UserAuthContext} from './AuthContext';
 import Tabs from './Tabs';
 import PdfViewer from './PdfViewer';
 import Edit from './Edit';
-import Personalinfo from './Personalinfo';
 
 const Route = () => {
   const Stack = createNativeStackNavigator();
@@ -48,7 +47,6 @@ const Route = () => {
             <Stack.Screen name="Account" component={Account} />
             <Stack.Screen name="PdfViewer" component={PdfViewer} />
             <Stack.Screen name="Edit" component={Edit} />
-            <Stack.Screen name="Personalinfo" component={Personalinfo} />
           </>
         )}
       </Stack.Navigator>
