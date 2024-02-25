@@ -30,11 +30,11 @@ const Placements = () => {
       {documents &&
         documents.map(value => {
           return (
-            <View className="bg-violet-700 p-2 my-2 rounded-md" key={value?.id}>
-              <Text className="font-Regular text-white text-lg">
+            <View className="bg-violet-500 p-2 my-2 rounded-md" key={value?.id}>
+              <Text className="font-Bold text-white text-sm">
                 {value?.company_name}
               </Text>
-              <Text className="font-Regular text-white text-sm">
+              <Text className="font-Regular text-white text-xs">
                 {value?.job_description}
               </Text>
               <Text className="font-Regular text-white text-xs">

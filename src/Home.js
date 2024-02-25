@@ -102,10 +102,15 @@ const Home = ({navigation}) => {
           University Map
         </Text>
 
-        <Image
-          className="h-56 w-full rounded-md"
-          source={require('../assets/images/map.png')}
-        />
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('Viewmap');
+          }}>
+          <Image
+            className="h-56 w-full rounded-md"
+            source={require('../assets/images/map.png')}
+          />
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
